@@ -1,0 +1,188 @@
+body{
+  background: rgb(244,218,248);
+  background: linear-gradient(90deg, rgba(244,218,248,1) 0%, rgba(244,218,248,1) 40%, rgba(227,218,252,1) 60%, rgba(227,218,252,1) 100%);
+  padding: 10px 20px;
+  padding-bottom: 50px;
+}
+.headline{
+  display: flex;
+  padding: 0 30px;
+  min-width: auto;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main{
+  padding: 10px;
+  border: 2px solid lightcyan;
+  border-radius: 5px;
+}
+
+.filter-newbutton{
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-div, .sort-div{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.date-box{
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-weight: 600;
+  font-size: x-large;
+}
+
+.sort-div{
+  padding: 0 20px;
+}
+
+.alltask-div{
+  display: flex;
+  padding: 0 20px;
+  overflow-y: hidden;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.task-box{
+  margin: 20px 0;
+  height: 500px ;
+  width: 230px;
+  scroll-snap-align: center;
+  min-width: 230px;
+  border-radius: 6px;
+  background-color: white;
+  overflow: auto;
+}
+
+::-webkit-scrollbar{
+  width: 12px;
+  height: 20px;
+}
+::-webkit-scrollbar-track{
+  background: linear-gradient(90deg, rgba(244,218,248,1) 0%, rgba(244,218,248,1) 40%, rgba(227,218,252,1) 60%, rgba(227,218,252,1) 100%);
+}
+::-webkit-scrollbar-thumb{
+  background: lightgray;
+  border-radius: 5px;
+}
+
+h4{
+  margin: 0;
+  text-align: center;
+  font-size: large;
+}
+
+.blue-box-prio{
+  background: #1e6aa0;
+  color: white;
+  padding: 3px 7px;
+  border-radius: 3px;
+}
+
+.blue-box-status{
+  border-radius: 5px;
+  background: #1e6aa0;
+  color: white;
+  padding: 5px;
+  width: 60%;
+  text-align: center;
+}
+
+.title-prio, .assigne-button{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.details-div{
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 15px 8px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  background: lightgrey;
+}
+
+.blue-btn{
+  background: #1e6aa0;
+  color: white;
+  border-radius: 3px;
+  padding: 1px 3px;
+}
+
+.status-headline{
+  padding: 3px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  color: white;
+}
+
+.bgcolor-p{
+  background: gray;
+}
+
+.bgcolor-ip{
+  background: orange;
+}
+
+.bgcolor-c{
+  background: rgb(130, 201, 25);
+}
+.bgcolor-d{
+  background: blueviolet;
+}
+.bgcolor-df{
+  background: palevioletred;
+}
+
+.task-button2{
+  display: none;
+}
+
+.input-fields{
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  background-color: lightgrey;
+}
+
+.popup-header{
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media all and  (max-width: 540px) {
+  .filter-div{
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+  }
+  .task-button{
+    display: none;
+  }
+  .sort-div{
+    margin-top:  20px;
+    justify-content: center;
+    margin-left: auto;
+  }
+  .date-box{
+    flex-direction: column;
+  }
+  .task-button2{
+    display: block;
+    padding: 0 20px;
+  }
+}
