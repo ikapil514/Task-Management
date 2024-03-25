@@ -121,7 +121,9 @@ export default function App() {
 
   function handleDeleteBtn(data) {
     setIsDeleteOpen(true);
-    setTaskId(data.id);
+    if (data.status !== "Completed") {
+      setTaskId(data.id);
+    }
     setIsMenuOpen(false);
   }
 
