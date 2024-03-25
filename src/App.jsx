@@ -82,6 +82,7 @@ export default function App() {
   // States
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isTask, setIsTask] = useState({});
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(null);
@@ -119,30 +120,36 @@ export default function App() {
     setIsOpen(true);
   }
 
-  function handleDeleteBtn(data) {
+  function handleDeleteBtn() {
     setIsDeleteOpen(true);
-    if (data.status !== "Completed") {
-      setTaskId(data.id);
-    }
     setIsMenuOpen(false);
   }
 
   function handleDeleteTask() {
-    const newArray = tasksArray.filter((task) => task.id !== taskId);
-    setTasksArray(newArray);
+    if (isTask.status !== "Completed") {
+      const newArray = tasksArray.filter((item) => item.id !== isTask.id);
+      setTaskId(isTask.id);
+      console.log(isTask.id);
+      setTasksArray(newArray);
+    }
     setIsDeleteOpen(false);
   }
 
-  function handleEditBtn(data) {
+  function handleEditBtn() {
     setIsEditOpen(true);
     setIsOpen(false);
-    setTaskId(data.id);
-    setTitle(data.title);
-    setDescription(data.description);
-    setAssignee(data.assignee);
-    setStatus(data.status);
-    setPriority(data.priority);
+    setTaskId(isTask.id);
+    setTitle(isTask.title);
+    setDescription(isTask.description);
+    setAssignee(isTask.assignee);
+    setStatus(isTask.status);
+    setPriority(isTask.priority);
     setIsMenuOpen(false);
+  }
+
+  function handleTaskEdit(event, data) {
+    setIsMenuOpen(event.currentTarget);
+    setIsTask(data);
   }
 
   function handleDialogClose() {
@@ -187,9 +194,8 @@ export default function App() {
     setIsEditOpen(false);
   }
 
-  function handleMenuBtn(event) {
-    setIsMenuOpen(event.currentTarget);
-  }
+  // function handleTaskEdit(event) {
+  // }
 
   function handleMenuBtnClose() {
     setIsMenuOpen(null);
@@ -215,6 +221,14 @@ export default function App() {
           <IoPerson size={24} />
         </h3>
       </div>
+      <Menu
+        open={Boolean(isMenuOpen)}
+        onClose={handleMenuBtnClose}
+        anchorEl={isMenuOpen}
+      >
+        <MenuItem onClick={handleEditBtn}>Edit</MenuItem>
+        <MenuItem onClick={handleDeleteBtn}>Delete</MenuItem>
+      </Menu>
       <div className="main">
         <div className="filter-newbutton">
           <div className="filter-div">
@@ -286,22 +300,10 @@ export default function App() {
                             <h5>@{t.assignee}</h5>
                             <button
                               className="blue-btn"
-                              onClick={handleMenuBtn}
+                              onClick={(event) => handleTaskEdit(event, t)}
                             >
                               <HiOutlineDotsVertical />
                             </button>
-                            <Menu
-                              open={Boolean(isMenuOpen)}
-                              onClose={handleMenuBtnClose}
-                              anchorEl={isMenuOpen}
-                            >
-                              <MenuItem onClick={() => handleEditBtn(t)}>
-                                Edit
-                              </MenuItem>
-                              <MenuItem onClick={() => handleDeleteBtn(t)}>
-                                Delete
-                              </MenuItem>
-                            </Menu>
                           </div>
                           <p className="blue-box-status">{t.status}</p>
                         </div>
@@ -325,7 +327,7 @@ export default function App() {
                           <div className="assigne-button">
                             <h5>@{t.assignee}</h5>
                             <button
-                              onClick={handleMenuBtn}
+                              onClick={(event) => handleTaskEdit(event, t)}
                               className="blue-btn"
                             >
                               <HiOutlineDotsVertical />
@@ -353,7 +355,7 @@ export default function App() {
                           <div className="assigne-button">
                             <h5>@{t.assignee}</h5>
                             <button
-                              onClick={handleMenuBtn}
+                              onClick={(event) => handleTaskEdit(event, t)}
                               className="blue-btn"
                             >
                               <HiOutlineDotsVertical />
@@ -381,7 +383,7 @@ export default function App() {
                           <div className="assigne-button">
                             <h5>@{t.assignee}</h5>
                             <button
-                              onClick={handleMenuBtn}
+                              onClick={(event) => handleTaskEdit(event, t)}
                               className="blue-btn"
                             >
                               <HiOutlineDotsVertical />
@@ -409,7 +411,7 @@ export default function App() {
                           <div className="assigne-button">
                             <h5>@{t.assignee}</h5>
                             <button
-                              onClick={handleMenuBtn}
+                              onClick={(event) => handleTaskEdit(event, t)}
                               className="blue-btn"
                             >
                               <HiOutlineDotsVertical />
