@@ -98,7 +98,12 @@ export default function App() {
   const [priority, setPriority] = useState(null);
 
   const filterArray = useMemo(() => {
-    if (selectedPriority) {
+    if (selectedPriority && assigneeValue) {
+      return tasksArray.filter(
+        (item) =>
+          item.priority === selectedPriority && item.assignee === assigneeValue
+      );
+    } else if (selectedPriority) {
       return tasksArray.filter((item) => item.priority === selectedPriority);
     } else if (assigneeValue) {
       return tasksArray.filter((item) => item.assignee === assigneeValue);
