@@ -82,7 +82,7 @@ export default function App() {
   // States
 
   const [isOpen, setIsOpen] = useState(false);
-  const [isTask, setIsTask] = useState({});
+  const [selectedTask, setSelectedTask] = useState({});
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(null);
@@ -90,7 +90,6 @@ export default function App() {
   const [assigneeValue, setAssigneValue] = useState("");
   const [sortingPriority, setSortingPriority] = useState(null);
   const [tasksArray, setTasksArray] = useState(tasks);
-  const [taskId, setTaskId] = useState(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [assignee, setAssignee] = useState("");
@@ -126,30 +125,25 @@ export default function App() {
   }
 
   function handleDeleteTask() {
-    if (isTask.status !== "Completed") {
-      const newArray = tasksArray.filter((item) => item.id !== isTask.id);
-      setTaskId(isTask.id);
-      console.log(isTask.id);
-      setTasksArray(newArray);
-    }
+    const newArray = tasksArray.filter((item) => item.id !== selectedTask.id);
+    setTasksArray(newArray);
     setIsDeleteOpen(false);
   }
 
   function handleEditBtn() {
     setIsEditOpen(true);
     setIsOpen(false);
-    setTaskId(isTask.id);
-    setTitle(isTask.title);
-    setDescription(isTask.description);
-    setAssignee(isTask.assignee);
-    setStatus(isTask.status);
-    setPriority(isTask.priority);
+    setTitle(selectedTask.title);
+    setDescription(selectedTask.description);
+    setAssignee(selectedTask.assignee);
+    setStatus(selectedTask.status);
+    setPriority(selectedTask.priority);
     setIsMenuOpen(false);
   }
 
   function handleTaskEdit(event, data) {
     setIsMenuOpen(event.currentTarget);
-    setIsTask(data);
+    setSelectedTask(data);
   }
 
   function handleDialogClose() {
@@ -179,7 +173,7 @@ export default function App() {
 
   function handleUpdateTask() {
     const data = {
-      id: taskId,
+      id: selectedTask.id,
       title: title,
       description: description,
       team: team,
@@ -188,14 +182,11 @@ export default function App() {
       status: status,
       date: new Date(),
     };
-    const newArray = tasksArray.filter((task) => task.id !== data.id);
+    const newArray = tasksArray.filter((item) => item.id !== data.id);
     setTasksArray(newArray);
     setTasksArray((prevState) => [...prevState, data]);
     setIsEditOpen(false);
   }
-
-  // function handleTaskEdit(event) {
-  // }
 
   function handleMenuBtnClose() {
     setIsMenuOpen(null);
@@ -227,7 +218,12 @@ export default function App() {
         anchorEl={isMenuOpen}
       >
         <MenuItem onClick={handleEditBtn}>Edit</MenuItem>
-        <MenuItem onClick={handleDeleteBtn}>Delete</MenuItem>
+        <MenuItem
+          onClick={handleDeleteBtn}
+          disabled={selectedTask.status === "Completed"}
+        >
+          Delete
+        </MenuItem>
       </Menu>
       <div className="main">
         <div className="filter-newbutton">
