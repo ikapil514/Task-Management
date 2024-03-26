@@ -272,11 +272,6 @@ export default function App() {
                 format={"yyyy/MM/dd"}
                 onChange={(event) => setStartDate(event.target.value)}
               />
-              {/* <input
-                type="date"
-                value={startDate}
-                onChange={(value) => setStartDate(value)}
-              ></input> */}
               <span>-</span>
               <TextField
                 size="small"
