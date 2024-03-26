@@ -268,6 +268,7 @@ export default function App() {
               <TextField
                 size="small"
                 label="Start Date"
+                focused
                 type="date"
                 value={startDate}
                 format={"yyyy/MM/dd"}
@@ -278,6 +279,7 @@ export default function App() {
                 size="small"
                 label="End Date"
                 type="date"
+                focused
                 value={endDate}
                 onChange={(event) => setEndDate(event.target.value)}
               />
