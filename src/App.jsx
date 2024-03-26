@@ -249,7 +249,8 @@ export default function App() {
           <div className="filter-div">
             <h3>Filter By:</h3>
             <TextField
-              label="Enter Assignee Name"
+              label="Assignee Name"
+              placeholder="Enter Assignee Name"
               value={assigneeValue}
               onChange={handleAssigneValue}
               size="small"
@@ -267,7 +268,7 @@ export default function App() {
             <div className="date-box">
               <TextField
                 size="small"
-                label="Start Date"
+                label="From"
                 focused
                 type="date"
                 value={startDate}
@@ -277,7 +278,7 @@ export default function App() {
               <span>-</span>
               <TextField
                 size="small"
-                label="End Date"
+                label="To"
                 type="date"
                 focused
                 value={endDate}
