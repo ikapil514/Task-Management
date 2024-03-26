@@ -19,7 +19,7 @@ const tasks = [
     status: "Assign",
     description: "This is a test description for text purpose to see in a page",
     priority: "P0",
-    date: "10/10/2021",
+    date: "2023-09-09",
   },
   {
     id: 2,
@@ -28,7 +28,7 @@ const tasks = [
     status: "In Progress",
     description: "This is a test description for text purpose to see in a page",
     priority: "P1",
-    date: "01/01/2021",
+    date: "2024-03-11",
   },
   {
     id: 3,
@@ -37,7 +37,7 @@ const tasks = [
     status: "Deferred",
     description: "This is a test description for text purpose to see in a page",
     priority: "P2",
-    date: "01/02/2021",
+    date: "2024-04-12",
   },
   {
     id: 4,
@@ -46,7 +46,7 @@ const tasks = [
     status: "Deployed",
     description: "This is a test description for text purpose to see in a page",
     priority: "P0",
-    date: "20/01/2021",
+    date: "2024-03-22",
   },
   {
     id: 5,
@@ -55,7 +55,7 @@ const tasks = [
     status: "Completed",
     description: "This is a test description for text purpose to see in a page",
     priority: "P2",
-    date: "01/02/2021 - 20/01/2021",
+    date: "2024-02-02",
   },
   {
     id: 6,
@@ -64,7 +64,7 @@ const tasks = [
     status: "In Progress",
     description: "This is a test description for text purpose to see in a page",
     priority: "P0",
-    date: "20/05/2021",
+    date: "2024-03-03",
   },
   // More tasks here...
 ];
@@ -94,6 +94,8 @@ export default function App() {
   const [description, setDescription] = useState("");
   const [assignee, setAssignee] = useState("");
   const [team, setTeam] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [status, setStatus] = useState("Assign");
   const [priority, setPriority] = useState(null);
 
@@ -114,9 +116,21 @@ export default function App() {
         return a.priority.localeCompare(b.priority);
       });
       return sortedArray;
+    } else if (startDate && endDate) {
+      console.log(startDate, endDate);
+      return tasksArray.filter(
+        (item) => item.date >= startDate && item.date <= endDate
+      );
     }
     return tasksArray;
-  }, [selectedPriority, sortingPriority, assigneeValue, tasksArray]);
+  }, [
+    selectedPriority,
+    sortingPriority,
+    assigneeValue,
+    tasksArray,
+    startDate,
+    endDate,
+  ]);
 
   // Handlers
 
@@ -250,14 +264,27 @@ export default function App() {
                 <TextField {...params} label="Priroty" />
               )}
             />
-
-            {/* This is date Fields */}
-
-            {/* <div className="date-box">
-              <TextField size="small" type="date" />
+            <div className="date-box">
+              <TextField
+                size="small"
+                type="date"
+                value={startDate}
+                format={"yyyy/MM/dd"}
+                onChange={(event) => setStartDate(event.target.value)}
+              />
+              {/* <input
+                type="date"
+                value={startDate}
+                onChange={(value) => setStartDate(value)}
+              ></input> */}
               <span>-</span>
-              <TextField size="small" type="date" />
-            </div> */}
+              <TextField
+                size="small"
+                type="date"
+                value={endDate}
+                onChange={(event) => setEndDate(event.target.value)}
+              />
+            </div>
           </div>
           <div className="task-button">
             <Button
