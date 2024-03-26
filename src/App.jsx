@@ -267,6 +267,7 @@ export default function App() {
             <div className="date-box">
               <TextField
                 size="small"
+                label="Start Date"
                 type="date"
                 value={startDate}
                 format={"yyyy/MM/dd"}
@@ -275,6 +276,7 @@ export default function App() {
               <span>-</span>
               <TextField
                 size="small"
+                label="End Date"
                 type="date"
                 value={endDate}
                 onChange={(event) => setEndDate(event.target.value)}
